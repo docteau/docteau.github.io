@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Damien Octeau</title>
+		<link href="css.css" rel="stylesheet" type="text/css">
+		<script src="js/ga.js"></script>
+	</head>
+	
+	<body>
+		<table cellspacing="0" cellpadding="5px">
+			<tr> <td class="myname">Damien Octeau</td> </tr>
+			<tr> <td id="nav" class="mylinks"> <myl> <a href="index.html" class="linknostyle">Home</a> &loz; <a href="research.html" class="linknostyle">Research</a> &loz; <a href="publications.html" class="linknostyle">Publications</a> &loz; <a href="vita.html" class="linknostyle">Vita</a> &loz; <strong>Tools</strong> </myl> </td> </tr>
+		</table>
+		
+		<div class="content">
+
+		<h3>Epicc</h3>
+		<p>Many threats present in smartphones are the result of interactions 
+		between application components, not just artifacts of single 
+		components. For example, information may flow between components in an 
+		unsafe manner. A component in an application may retrieve a user's 
+		location data or contacts. It may subsequently send the sensitive 
+		private information to a component in another application. The 
+		receiving component may then leak the sensitive information to the 
+		network, to an untrusted third party.
+		</p>
+		
+		<p>We reduce the discovery of ICC to an instance of the Interprocedural
+		 Distributive Environment (IDE) data flow problem. This approach is 
+		 very accurate, conservatively keeping track of multiple execution 
+		 branches. It is path-sensitive, flow-sensitive, inter-procedural and 
+		 context-sensitive. Our implementation of this approach is called Epicc 
+		 (Effective and Precise ICC). It scales well, taking on average less 
+		 than two minutes per application in a large scale study of 1,200 
+		 applications. Epicc uses Java classes as input, which can be generated 
+		 from Android bytecode using our Dare retargeting tool.
+		 </p>
+		 
+		 <p>For information regarding obtaining and using Epicc, please visit 
+		 <a href="http://siis.cse.psu.edu/epicc/">siis.cse.psu.edu/epicc</a>.
+		
+		<h3>Dare</h3>
+<p>Dare is a tool that retargets Android applications running on the Dalvik 
+Virtual Machine to traditional Java Virtual Machine .class files. These .class files can then be 
+processed by existing Java tools, including decompilers. Thus, Android 
+applications can be analyzed using a vast range of techniques developed for 
+traditional Java applications. Dare replaces ded as a retargeting tool: it 
+is more accurate, more efficient, more powerful and can even handle cases 
+where the input code is unverifiable.
+</p>
+
+<p>Dare was awarded the Best Artifact Award at the 20th International Symposium 
+on the Foundations of Software Engineering (FSE), recognizing its value as a 
+significant and high-quality tool. For more information, you can read the 
+paper "Retargeting Android Applications to Java Bytecode" by Octeau et al., 
+published in the proceedings of the 20th International Symposium on the 
+Foundations of Software Engineering (FSE). For downloads, see the 
+<a href="http://siis.cse.psu.edu/dare/">Dare page</a>.
+</p>
+
+<h3>ded</h3>
+<p>Smartphone applications are frequently incompletely vetted, poorly isolated, 
+and installed by users without restraint. Smartphone research frequently needs 
+to understand how these applications behave. ded is a project which aims at 
+decompiling Android applications. The ded tool retargets Android applications 
+in .dex format to traditional .class files. These .class files can then be 
+processed by existing Java tools, including decompilers. Thus, Android 
+applications can be analyzed using a vast range of techniques developed for 
+traditional Java applications.
+</p>
+
+<p>
+For information regarding obtaining and using ded, please visit 
+<a href="http://siis.cse.psu.edu/ded/">siis.cse.psu.edu/ded</a>.
+</p>
+		<br>
+		</div>
+		
+		<div class="bott">
+		<table>
+			<tr> <td> </td> </tr>
+		</table>
+		</div>		
+	</body>
+
+
+</html>
+
