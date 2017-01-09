@@ -18,7 +18,55 @@
 		
 		<div class="content">
 
-		<h3>Epicc</h3>
+		<h3>PRIMO</h3>
+		<p>Despite the many techniques devised to increase the precision of 
+		static analysis results, the results precision is often not high 
+		enough for large scale analysis. This is because the static inference 
+		of many properties is undecidable, and others are too computationally 
+		expensive. This is especially problematic with the rise of centralized 
+		application markets, where market providers may want to verify 
+		properties (e.g., security) in their entire corpus. In this case 
+		imprecise results are not acceptable.
+		</p>
+
+		<p>We explore the use of probabilistic models in order to help sift 
+		through large numbers of results and prioritize them by decreasing 
+		order of likelihood. We apply this to the computation of links between 
+		over 10,000 Android applications with our PRIMO tool. PRIMO is able to 
+		compute links between various applications as computed by IC3 (see 
+		below). It can also compute the probability that these links are true 
+		positives.
+		</p>
+
+		<p>For information on PRIMO, please visit 
+		<a href="http://siis.cse.psu.edu/primo/">siis.cse.psu.edu/primo</a>.
+		</p>
+
+		<h3>COAL</h3>
+		<p>Many program analyses require statically inferring the possible 
+		values of object variables. However, current approaches either do not 
+		account for correlations between object fields or do so in an ad hoc 
+		manner. The COAL project enables the specification and solution of 
+		these problems in a principled way. The project includes a language 
+		that is used to describe the classes of the objects whose value should 
+		be inferred. It also includes a solver, which computes the object 
+		values.
+		</p>
+
+		<p>The COAL language allows easy specification of composite constant 
+		propagation problems. Our COAL solver takes as inputs a COAL 
+		specification and the code that needs to be analyzed and automatically 
+		outputs the value of the fields of the requested variables. Note that 
+		in programs where there are several possible values for a given object, 
+		the COAL solver infers all possible values, taking into account the 
+		correlations between the fields on different execution paths.
+		</p>
+
+		<p>For information about COAL, please visit 
+		<a href="http://siis.cse.psu.edu/coal/">siis.cse.psu.edu/coal</a>.
+		</p>
+
+		<h3>IC3</h3>
 		<p>Many threats present in smartphones are the result of interactions 
 		between application components, not just artifacts of single 
 		components. For example, information may flow between components in an 
@@ -28,16 +76,21 @@
 		receiving component may then leak the sensitive information to the 
 		network, to an untrusted third party.
 		</p>
+
+		<p>Using COAL, we build IC3, a tool for inferring ICC with 
+		significantly better precision than Epicc. Unlike Epicc, it models all 
+		ICC primitives.
+		</p>
+
+		<p>For information about IC3, please visit 
+		<a href="http://siis.cse.psu.edu/ic3/">siis.cse.psu.edu/ic3</a>.
+		</p>
 		
-		<p>We reduce the discovery of ICC to an instance of the Interprocedural
-		 Distributive Environment (IDE) data flow problem. This approach is 
-		 very accurate, conservatively keeping track of multiple execution 
-		 branches. It is path-sensitive, flow-sensitive, inter-procedural and 
-		 context-sensitive. Our implementation of this approach is called Epicc 
-		 (Effective and Precise ICC). It scales well, taking on average less 
-		 than two minutes per application in a large scale study of 1,200 
-		 applications. Epicc uses Java classes as input, which can be generated 
-		 from Android bytecode using our Dare retargeting tool.
+		<h3>Epicc</h3>
+		<p>Epicc was our initial tool for inferring ICC in Android 
+		applications. It paved the way for the idea of reducing the inference 
+		of object values to an Interprocedural Distributive Environment (IDE) 
+		data flow problem.
 		 </p>
 		 
 		 <p>For information regarding obtaining and using Epicc, please visit 

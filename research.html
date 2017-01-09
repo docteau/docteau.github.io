@@ -19,82 +19,34 @@
 		<div class="content">
 
 		<td class="body-research">
-		<h2>Epicc: Inferring Inter-Component Communication in mobile applications</h2>
-		<p>Many threats present in smartphones are the result of interactions 
-		between application components, not just artifacts of single 
-		components. For example, information may flow between components in an 
-		unsafe manner. A component in an application may retrieve a user's 
-		location data or contacts. It may subsequently send the sensitive 
-		private information to a component in another application. The 
-		receiving component may then leak the sensitive information to the 
-		network, to an untrusted third party.
-		</p>
+		<h2>Retargeting Mobile Applications to Java Bytecode</h2>
 
-		<p>
-		However, current techniques for identifying inter-component communication (ICC) 
-		are ad hoc and do not scale to large numbers of applications. That is why we 
-		developed an approach to statically study ICC that is both precise and highly 
-		scalable. Further, it is defined using formalisms already widely studied by 
-		the program analysis community.
-		</p>
+<p class="text">
+Android applications are developed in Java but compiled to a platform-specific 
+Dalvik bytecode. Dalvik bytecode runs in a Dalvik virtual machine, which was 
+designed for resource-constrained platforms such as smartphones and tablets. 
+Since existing analysis frameworks target Java source code and bytecode, it is 
+necessary to convert Android applications to these well-known Java formats.
+</p>
 
-		<center>
-		<div style="width:300px">
-		<img src="pics/env-transformers.jpg" alt="Environment transformers" style="max-width:100%"></img>
-		</div>
-		</center>
-
-		<p>We reduce the discovery of ICC to an instance of the Interprocedural
-		Distributive Environment (IDE) data flow problem. This approach is 
-		very accurate, conservatively keeping track of multiple execution 
-		branches. It is path-sensitive, flow-sensitive, inter-procedural and 
-		context-sensitive. Our implementation of this approach is called Epicc 
-		(Effective and Precise ICC). It scales well, taking on average less 
-		than two minutes per application in a large scale study of 1,200 
-		applications. Epicc uses Java classes as input, which can be generated 
-		from Android bytecode using our Dare retargeting tool.
-		</p>
-
-		<p>
-		Our tool is built on top of 
-		<a href="http://www.sable.mcgill.ca/soot/">Soot</a> and uses the 
-		<a href="https://github.com/Sable/heros">Heros</a> IDE solver. This allows 
-		us to leverage many analyses that are part of Soot (aliasing analysis, call 
-		graph construction, etc.) and to obtain solutions to IDE data flow problem 
-		efficiently. Combined with our formally-defined IDE reduction, 
-		this enables us to obtain precise results when applying Epicc to vulnerability 
-		detection.
-		Epicc is indeed more precise than previously 
-		released ICC tools. Further, other tools related to ICC have looked at 
-		vulnerabilities of component entry points and exit points, whereas Epicc seeks 
-		to effectively connect components that may communicate with each other.
-		</p>
-
-		<h3>Related Publications</h3>
-
-		<p>
-		Damien Octeau, Patrick McDaniel, Somesh Jha, Alexandre Bartel, Eric 
-		Bodden, Jacques Klein and Yves Le Traon. <rrp class=title> Effective 
-		Inter-Component Communication Mapping in Android with Epicc: An 
-		Essential Step Towards Holistic Security Analysis.</rrp> 20th 
-		International Symposium on the Foundations of Software Engineering 
-		(FSE). Washington, DC. August 2013.
-		</p>
-
-		<h3>Related Tools</h3>
-		<p>
-		<a href="http://siis.cse.psu.edu/epicc/">Epicc</a>
-		</p>
-
-<hr />
-
-<h2>Dare: Dalvik Retargeting</h2>
- <p>
-Dare is a project which aims at enabling Android application analysis. The Dare 
-tool retargets Android applications in .dex or .apk format to traditional 
-.class files. These .class files can then be processed by existing Java tools, 
+<p class="text">
+ded is a project which aims at decompiling Android applications. The ded 
+tool retargets Android applications in .dex format to traditional .class 
+files. These .class files can then be processed by existing Java tools, 
 including decompilers. Thus, Android applications can be analyzed using a 
-vast range of techniques developed for traditional Java applications.
+vast range of techniques developed for traditional Java applications. 
+</p>
+
+<p class="text">
+ded was the first tool that was able to reliably convert Android applications 
+to source code. It was used in a seminal large scale 
+analysis of Android applications. We decompiled the 1,100 
+most popular applications using 
+ded. The decompiled code was then analyzed using Fortify Source Code 
+Analyzer (SCA). We implemented Android-specific detection rules in Fortify SCA. 
+While this analysis did not reveal any malware, we found that phone 
+identifiers and other personally identifiable information were widely used 
+by Android applications.
 </p>
 
 <center>
@@ -103,8 +55,8 @@ vast range of techniques developed for traditional Java applications.
   </div>
 </center>
 
-<p>
-Dare adopts a principled approach to Dalvik 
+ <p class="text">
+On the other hand, the Dare tool adopts a principled approach to Dalvik 
 retargeting. Its typed intermediate representation uses a strong type 
 inference algorithm and allows translation to Java bytecode using only 9 
 rules for all 257 Dalvik opcodes. An important feature of Dare is 
@@ -120,84 +72,23 @@ researchers, we have made Dare available for download. Both binaries and
 source code are available from the <a href="http://siis.cse.psu.edu/dare/">Dare webpage</a>.
 </p>
 
-
 <h3>Related Publications</h3>
-
 <p>
-  Damien Octeau, Somesh Jha and Patrick McDaniel. <rrp class=title>Retargeting 
-  Android Applications to Java Bytecode.</rrp> 20th International Symposium 
+  Damien Octeau, Somesh Jha and Patrick McDaniel. <i>Retargeting 
+  Android Applications to Java Bytecode.</i> 20th International Symposium 
   on the Foundations of Software Engineering (FSE). Cary, NC. November 2012. 
   <i><font color = "ff0000">Best Artifact Award</font></i>
 </p>
-
-<h3>Related Tools</h3>
-<p>
-<a href="http://siis.cse.psu.edu/dare/">Dare</a>
-</p>
-
-<hr />
-
-<h2>ded: Decompiling Android Applications</h2>
-
-<p class="text">
-Smartphone applications are frequently incompletely vetted, poorly isolated, 
-and installed by users without restraint. Such behavior is fraught with peril: 
-applications containing malicious logic or critical vulnerabilities are 
-likely to be identified only after substantial damage has already occurred. 
-Unfortunately, the limitations of application markets make them a poor agent 
-for certifying that applications are secure. 
-</p>
-
-<p class="text">
-Android applications are developed in Java but compiled to a platform-specific 
-Dalvik bytecode. Dalvik bytecode runs in a Dalvik virtual machine, which was 
-designed for resource-constrained platforms such as smartphones and tablets. 
-Since existing analysis frameworks target Java source code and bytecode, it is 
-necessary to convert Android applications to these well-known Java formats.
-</p>
-
-<center>
-  <div style="width:300px">
-  <img src="pics/class_to_dex.jpg" alt="Android application compilation process" style="max-width:100%"></img>
-  </div>
-</center>
-
-<p class="text">
-ded is a project which aims at decompiling Android applications. The ded 
-tool retargets Android applications in .dex format to traditional .class 
-files. These .class files can then be processed by existing Java tools, 
-including decompilers. Thus, Android applications can be analyzed using a 
-vast range of techniques developed for traditional Java applications.
-</p>
-
-<center>
-  <div style="width:200px">
-  <img src="pics/conversion_overview.jpg" alt="ded conversion overview" style="max-width:100%"></img>
-  </div>
-</center>
-
-<p class="text">
-We used our decompilation techniques to perform a large scale 
-analysis of Android applications. We decompiled the 1,100 
-most popular applications using 
-ded. The decompiled code was then analyzed using Fortify Source Code 
-Analyzer (SCA). We implemented Android-specific detection rules in Fortify SCA. 
-While this analysis did not reveal any malware, we found that phone 
-identifiers and other personally identifiable information were widely used 
-by Android applications.
-</p>
-
-<h3>Related Publications</h3>
 <p>
   William Enck, Damien Octeau Patrick McDaniel and Swarat Chaudhuri. 
-  <rrp class=title>A Study of Android Application Security.</rrp> 
+  <i>A Study of Android Application Security.</i> 
   Proceedings of the 20th USENIX Security Symposium. San Francisco, CA, 
   August 2011.
 </p>
 <p>
   Damien Octeau, William Enck and Patrick McDaniel. 
-  <rrp class=title>The ded Decompiler.
-  </rrp>
+  <i>The ded Decompiler.
+  </i>
   Technical Report NAS-TR-0140-2010, 
   Network and Security Research Center, 
 Department of Computer Science and Engineering, Pennsylvania State 
@@ -206,11 +97,167 @@ University, University Park, PA.
 
 <h3>Related Tools</h3>
 <p>
+<a href="http://siis.cse.psu.edu/dare/">Dare</a>
+</p>
+<p>
 <a href="http://siis.cse.psu.edu/ded/">ded</a>
 </p>
 <p>
 <a href="http://siis.cse.psu.edu/tools/fsca_rules-final.html">Fortify SCA custom rules</a>
 </p>
+
+<hr />
+
+		<h2>Composite Constant Propagation and its Application to Program 
+		Analysis for Security</h2>
+		<p>Many threats present in smartphones are the result of interactions 
+		between application components, not just artifacts of single 
+		components. For example, information may flow between components in an 
+		unsafe manner. A component in an application may retrieve a user's 
+		location data or contacts. It may subsequently send the sensitive 
+		private information to a component in another application. The 
+		receiving component may then leak the sensitive information to the 
+		network, to an untrusted third party.
+		</p>
+
+		<p>We reduce the discovery of ICC to an instance of the Interprocedural
+		Distributive Environment (IDE) data flow problem. This approach is 
+		very accurate, conservatively keeping track of multiple execution 
+		branches. It is path-sensitive, flow-sensitive, inter-procedural and 
+		context-sensitive. Our implementation of this approach is called Epicc 
+		(Effective and Precise ICC). It scales well, taking on average less 
+		than two minutes per application in a large scale study of 1,200 
+		applications. Epicc uses Java classes as input, which can be generated 
+		from Android bytecode using our Dare retargeting tool.
+		</p>
+
+		<center>
+		<div style="width:300px">
+		<img src="pics/env-transformers.jpg" alt="Environment transformers" style="max-width:100%"></img>
+		</div>
+		</center>
+
+		<p>While Epicc is a significant improvement over state-of-the-art 
+		approaches, it is still limited in coverage, due to the difficulty of 
+		individually specifying data domains and transfer functions. Thus, we 
+		generalize the problem of inferring values of objects with composite 
+		types as composite constant propagation problems. We introduce the 
+		COAL language to specify composite constant propagation problems and 
+		implement a solver that automatically generates data domains and 
+		transfer functions. Solutions are then found using existing algorithms, 
+		requiring minimal intervention from the analyst.
+		</p>
+
+		<p>Using COAL, we build IC3, a tool for inferring ICC with 
+		significantly better precision than Epicc. Unlike Epicc, it models all 
+		ICC primitives. IC3 itself is used as the basis of inter-component 
+		information flow analysis in the related IccTA tool. COAL was also used 
+		with success to resolve reflection in Android applications.
+		</p>
+
+		<h3>Related Publications</h3>
+
+		<p>
+		Damien Octeau, Daniel Luchaup, Somesh Jha, and Patrick McDaniel. 
+		<a href="pubs/octeau-tse16.pdf">Composite Constant Propagation and its 
+		Application to Android Program Analysis</a>. <i>IEEE Transactions of 
+		Software Engineering (TSE)</i>, vol. 42, no. 11, pp. 999-1014, November 
+		2016.
+		</p>
+
+		<p>
+		Li Li, Tegawende F. Bissyande, Damien Octeau, and Jacques Klein. 
+		<a href="pubs/li-issta16.pdf">DroidRA: Taming Reflection to Support 
+		Whole-Program Analysis of Android Apps</a>. <i>Proceedings of the 25th 
+		International Symposium on Software 
+		Testing and Analysis (ISSTA)</i>. Saarbrucken, Germany, July 2016. 
+		<i>Acceptance rate: 25.17%</i>.
+		</p>
+
+		<p>
+		Damien Octeau, Daniel Luchaup, Matthew Dering, Somesh Jha, and Patrick 
+		McDaniel. <a href="pubs/octeau-icse15.pdf">Composite Constant 
+		Propagation: Application to Android 
+		Inter-Component Communication Analysis</a>. <i>Proceedings of the 37th 
+		International Conference on Software Engineering (ICSE)</i>, May 2015. 
+		Florence, Italy. <i>Acceptance rate: 18.5%</i>.
+		</p>
+
+		<p>
+		Li Li, Alexandre Bartel, Jacques Klein, Yves Le Traon, Steven Artz, 
+		Siegfried Rasthofer, Eric Bodden, Damien Octeau, and Patrick McDaniel. 
+		<a href="pubs/li-icse15.pdf">I Know What leaked in Your Pocket: 
+		Uncovering Privacy Leaks on Android 
+		Apps with Static Taint Analysis</a>. <i>Proceedings of the 37th 
+		International Conference on Software Engineering (ICSE)</i>, May 2015. 
+		Florence, Italy. <i>Acceptance rate: 18.5%</i>.
+		</p>
+
+		<p>
+		Damien Octeau, Patrick McDaniel, Somesh Jha, Alexandre Bartel, 
+		Eric Bodden, Jacques Klein, and Yves Le Traon. 
+		<a href="pubs/octeau-sec13.pdf">Effective 
+		Inter-Component Communication Mapping in Android with <i>Epicc</i>: An 
+		Essential Step Towards Holistic Security Analysis</a>. <i>Proceedings of 
+		the 22nd USENIX Security Symposium</i>, August 2013. Washington, DC. 
+		<i>Acceptance rate: 16.2%</i>.
+		</p>
+
+		<h3>Related Tools</h3>
+		<p>
+		<a href="http://siis.cse.psu.edu/ic3/">IC3</a>
+		</p>
+		<p>
+		<a href="http://siis.cse.psu.edu/coal/">COAL</a>
+		</p>
+		<p>
+		<a href="http://siis.cse.psu.edu/epicc/">Epicc</a>
+		</p>
+
+<hr />
+
+		<h2>Combining Static Analysis Results with Probabilistic Models</h2>
+		<p>Despite the many techniques devised to increase the precision of 
+		static analysis results, the results precision is often not high 
+		enough for large scale analysis. This is because the static inference 
+		of many properties is undecidable, and others are too computationally 
+		expensive. This is especially problematic with the rise of centralized 
+		application markets, where market providers may want to verify 
+		properties (e.g., security) in their entire corpus. In this case 
+		imprecise results are not acceptable.
+		</p>
+
+		<p>We explore the use of probabilistic models in order to help sift 
+		through large numbers of results and prioritize them by decreasing 
+		order of likelihood. We apply this to the computation of links between 
+		over 10,000 Android applications with our PRIMO tool. We find that 
+		probabilistic models are an effective and accurate way to predict 
+		which links computed with static analysis are most likely to be false 
+		positives.
+		</p>
+
+		<h3>Related Publications</h3>
+
+		<p>
+		Damien Octeau, Somesh Jha, Matthew Dering, Patrick McDaniel, Alexandre 
+		Bartel, Li Li, Jacques Klein, and Yves Le Traon. 
+		<a href="pubs/octeau-popl16.pdf">Combining Static Analysis with 
+		Probabilistic Models to Enable Market-Scale Android 
+		Inter-Component Analysis</a>. <i>Proceedings of the 43rd ACM 
+		SIGPLAN-SIGACT Symposium on Principles of Programming Languages 
+		(POPL)</i>, January 2016. St. Petersburg, Florida, USA. <i>Acceptance 
+		rate: 23.3%</i>.
+		</p>
+
+		<h3>Related Tools</h3>
+		<p>
+		<a href="http://siis.cse.psu.edu/primo/">PRIMO</a>
+		</p>
+
+
+<hr />
+
+
 	</td>
 	</div>
 		
